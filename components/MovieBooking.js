@@ -10,6 +10,19 @@ export default function MovieBooking({screenstyle}) {
   const [totalTickets, setTotaltickets] = useState(1);
   const [balcony, setBalcony] = useState(false);
   const [movieDate, setMoviedate] = useState(new Date());
+  function handleChangeMovieTitle(newTitle) {
+    setData(data => ({
+      ...data, // use the spread operator to 'spread' the previous booking properties
+      movieTitle: newTitle // update only the movieTitle
+    }));
+  };
+  function handleChangeTickets(tickets) {
+    setData(data => ({
+      ...data,
+      numberOfSeats: tickets
+    }));
+  };
+  
   const [movieList, setMovieList] = useState([
    {'id': 1, "title": "Kneecap", "age": 16},
    {'id' : 2, "title": "Joker, Folie a Deux", "age": 18}, 

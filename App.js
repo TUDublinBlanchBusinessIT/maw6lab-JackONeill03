@@ -1,4 +1,5 @@
 import { StyleSheet, View, Image, Dimensions } from 'react-native';
+import {AsyncStorage} from '@react-native-async-storage/async-storage';
 import Swiper from 'react-native-swiper';
 import PersonalInfo from './components/PersonalInfo';
 import MovieBooking from './components/MovieBooking';
@@ -6,7 +7,20 @@ import MovieBooking from './components/MovieBooking';
 
 export default function App() {
   
-  return (
+  async function saveData() {
+
+await AsyncStorage.setItem(uuid, JSON.stringify(booking));
+    Alert.alert("UUID=" + uuid);
+
+    try {
+      let thisBooking = await AsyncStorage.getItem(uuid);
+      Alert.alert(thisBooking.title);
+    }
+    catch {
+      Alert.alert("error getting data");
+      
+  }};
+
     <View style={styles.screencontainer}>
       <View style={styles.imgview}><Image source={require('./assets/moviesV3.png')}/></View>
       <Swiper showsButtons={true}>
@@ -14,7 +28,6 @@ export default function App() {
           <MovieBooking screenstyle={styles.screen}/>
       </Swiper>
     </View>
-  )
 }
 var width = Dimensions.get('window');
 const styles = StyleSheet.create({
